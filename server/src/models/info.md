@@ -1,0 +1,3 @@
+Propósito: Los modelos representan la estructura de los datos de la aplicación y manejan la lógica relacionada con la base de datos. Definen cómo los datos deben ser almacenados, validados y gestionados.
+Tareas comunes: Definir esquemas de datos, realizar consultas a la base de datos, insertar, actualizar o eliminar registros.
+Ejemplo: Un modelo podría representar la estructura de un empleado (nombre, edad, puesto, etc.) y contener métodos para interactuar con la base de datos, como agregar o buscar empleados.

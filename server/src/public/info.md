@@ -1,0 +1,2 @@
+Si tu aplicación sirve archivos estáticos como imágenes, archivos CSS o JavaScript del frontend, una carpeta public/ o assets/ es útil para organizar esos archivos.
+Ejemplo: imágenes estáticas, archivos descargables, etc.

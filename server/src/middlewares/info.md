@@ -1,0 +1,2 @@
+Incluye funciones middleware, que son aquellas que se ejecutan entre la recepción de una solicitud y la respuesta. Estas funciones pueden manejar la autenticación, la validación de datos, el manejo de errores, etc.
+Ejemplo: autenticación, manejo de CORS, validaciones antes de las rutas.

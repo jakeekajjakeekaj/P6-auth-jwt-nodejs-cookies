@@ -1,0 +1,2 @@
+Contiene la lógica de negocio que no corresponde directamente a un controlador o modelo. Estos archivos podrían gestionar la interacción entre modelos, lógica adicional de la aplicación o conexiones a servicios externos.
+Ejemplo: servicios de autenticación, servicios de manejo de archivos, etc.

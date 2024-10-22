@@ -1,0 +1,3 @@
+Propósito: Los controladores son responsables de manejar las solicitudes HTTP que llegan a la aplicación. Reciben la petición del cliente (por ejemplo, desde el frontend), procesan la lógica correspondiente (con la ayuda de los modelos), y finalmente devuelven una respuesta.
+Tareas comunes: Validar datos de entrada, llamar a servicios o modelos, y enviar respuestas al cliente.
+Ejemplo: Un controlador podría tener una función para manejar una solicitud POST para crear un nuevo empleado o GET para listar todos los empleados.

@@ -1,0 +1,3 @@
+Propósito: Este archivo es el punto de entrada principal de la aplicación. Aquí se inicia el servidor y se configuran los aspectos generales de la aplicación, como la inicialización de rutas, el middleware, y la conexión a la base de datos.
+Tareas comunes: Configurar el servidor (normalmente con Express en Node.js), registrar los middleware globales, cargar las rutas, y escuchar en un puerto para aceptar solicitudes HTTP.
+Ejemplo: En este archivo se inicia la conexión a la base de datos, se configuran las rutas principales y se establece el puerto en el que el servidor va a estar escuchando.

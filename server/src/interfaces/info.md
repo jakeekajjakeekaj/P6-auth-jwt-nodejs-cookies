@@ -1,0 +1,2 @@
+Si usas TypeScript, es útil tener un lugar donde almacenar todas las interfaces o tipos que se usan en diferentes partes de la aplicación, asegurando que tu código esté correctamente tipado.
+Ejemplo: tipos para los modelos de usuario, tipos para respuestas API, etc.

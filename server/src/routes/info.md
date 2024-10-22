@@ -1,0 +1,3 @@
+Propósito: Las rutas definen los endpoints (puntos de acceso) de la aplicación. Son las que se encargan de vincular las solicitudes entrantes (URLs y métodos HTTP) con los controladores correspondientes que manejarán esas solicitudes.
+Tareas comunes: Asignar controladores a rutas específicas, definir qué controlador debe manejar una ruta GET, POST, PUT, DELETE, etc.
+Ejemplo: La ruta /api/employees podría estar asociada a un controlador que maneje la obtención o creación de empleados.
