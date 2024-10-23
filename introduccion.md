@@ -69,3 +69,12 @@ Definir cualquier otra lógica global que la aplicación necesite antes de ser l
 La ventaja de separar la configuración en app.ts es que puedes probar la aplicación (sin tener que inicializar el servidor) y reutilizar la configuración en otros contextos, como en pruebas unitarias."
 
 Una vez finalizado esto, recordemos que debemos hacer nuestro script en el package.json: "dev": "nodemon src/index.ts"
+
+Ahora para trabajar con nuestra DB, creamos nuestro archivo squema.sql para ahí colocar nuestras consultas como buena práctica, y a su vez tendremos que instalar las siguinetes dependencias:
+"npm i dotenv mysql mysql2"
+
+Una vez instalado, procedemos a colocar un archivo .env a la misma altura que el server, para ahí mismo colocar nuestras variables de entorno, después de eso, dentro de la carpeta config, aparte de manejar a nuestra databse.ts, vamos a manejar a un archivo llamado config.ts, este archivo servirá para mantener a todas las variables de entorno en un lugar, para que al momento de utilizarlas podamos hacerlo sin ningún problema, una ve realizado esto, ya solo importamos nuestro config.ts dentro de nuestro database.ts para trabajar con nuestras variables de entorno y también lo hacemos en index.ts para así de igual manera trabajar con nuestras variables de entorno con los puertos.
+
+Ahora pasamos a la sección de los middlewares para ahí colocar las validaciones antes de que se pase a nuestro controlador, recordemos que las validaciones de datos de entrada SON RECOMENDABLES DE COLOCAR EN MIDDLEWARE, mientras que las validaciones CON LA LÓGICA DEL NEGOCIO SON RECOMENDABLES DE COLOCAR EN SERVICES (como al intentar localizar usuarios ya existentes o algo por el estilo)
+
+Una vez finalizado todo el primer caso, que sería para el register, recordemos como breves recodatorios que el ASYNC AWAIT son usados mayormente para cuando se realizará algún chequeo a la DB, es por esto que para el caso del MIDDLEWARE no es necesario, porque no revisamos en la DB, pero para el SERVICES si, ya que revisamos si ya existe en nuestra DB el usuario; así mismo recordemos que es buena opcón manejar un Promise<void> en la sección de controllers, ya que de esta manera justamente indicamos que toda la lógica se maneja ahí, que no retorna nada como tal a nadie, y así también evitamos problemas al manejar las routes por ejemplo
