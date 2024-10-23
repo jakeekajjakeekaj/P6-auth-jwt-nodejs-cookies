@@ -67,3 +67,5 @@ Registrar middleware (por ejemplo, express.json() para el manejo de JSON).
 Configurar las rutas.
 Definir cualquier otra lógica global que la aplicación necesite antes de ser levantada.
 La ventaja de separar la configuración en app.ts es que puedes probar la aplicación (sin tener que inicializar el servidor) y reutilizar la configuración en otros contextos, como en pruebas unitarias."
+
+Una vez finalizado esto, recordemos que debemos hacer nuestro script en el package.json: "dev": "nodemon src/index.ts"
