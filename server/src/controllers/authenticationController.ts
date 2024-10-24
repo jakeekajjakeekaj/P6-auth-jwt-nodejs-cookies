@@ -5,7 +5,8 @@ import {
   createLogout,
   fetchProtected
 } from '../models/authenticationModel';
-import { userExists } from '../services/userVlidationService';
+import { userExists } from '../services/userValidationService';
+import { passwordHash } from '../services/passwordHashService';
 
 export const postLogin = async(req: Request, res: Response)=> {
   try {
@@ -29,7 +30,11 @@ export const postRegister = async(req: Request, res: Response): Promise<void>=> 
       return;
     }
 
-    await createRegister(username, password);
+    // Hasheo de contraseña
+    const passwordHashed = await passwordHash(password);
+    
+    // LLamada al Model
+    await createRegister(username, passwordHashed);
     res.status(201).json({ message: "User registered successfully" });
   }
   catch(err) {

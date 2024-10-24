@@ -78,3 +78,10 @@ Una vez instalado, procedemos a colocar un archivo .env a la misma altura que el
 Ahora pasamos a la sección de los middlewares para ahí colocar las validaciones antes de que se pase a nuestro controlador, recordemos que las validaciones de datos de entrada SON RECOMENDABLES DE COLOCAR EN MIDDLEWARE, mientras que las validaciones CON LA LÓGICA DEL NEGOCIO SON RECOMENDABLES DE COLOCAR EN SERVICES (como al intentar localizar usuarios ya existentes o algo por el estilo)
 
 Una vez finalizado todo el primer caso, que sería para el register, recordemos como breves recodatorios que el ASYNC AWAIT son usados mayormente para cuando se realizará algún chequeo a la DB, es por esto que para el caso del MIDDLEWARE no es necesario, porque no revisamos en la DB, pero para el SERVICES si, ya que revisamos si ya existe en nuestra DB el usuario; así mismo recordemos que es buena opcón manejar un Promise<void> en la sección de controllers, ya que de esta manera justamente indicamos que toda la lógica se maneja ahí, que no retorna nada como tal a nadie, y así también evitamos problemas al manejar las routes por ejemplo
+
+Ya probamos ahora sí todo con la DB e forma correcta y funciona bien, pero ahora quitaremos que la contraseña se muestre con texto plano (sin encriptar) para que se pueda encriptar, para esto instalaremos: 
+"npm i bcrypt"
+De esta manera podremos encriptar la contraseña, lo bueno de hacer esto, es que lo pasa a hash, pero si nosotros quisiéramos saber cuál es el texto plano de ese hash ya no se podrá, osea que ahora todo se deberá trabajar con funciones que verifiquen los hash para confirmar que efectivamente sea la contraseña, algo muy bueno a nivel seguridad
+Ahora recordemos que estamos usando TS, por lo que también debemos instalar:
+"npm i --save-dev @types/bcrypt"
+La generación de la contraseña hasheada se manejará dentro del service
