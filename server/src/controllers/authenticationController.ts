@@ -5,17 +5,36 @@ import {
   createLogout,
   fetchProtected
 } from '../models/authenticationModel';
-import { userExists } from '../services/userValidationService';
-import { passwordHash } from '../services/passwordHashService';
+import { fetchUser, userExists } from '../services/userValidationService';
+import { passwordHash, comparePassword } from '../services/passwordHashService';
 
-export const postLogin = async(req: Request, res: Response)=> {
+export const postLogin = async(req: Request, res: Response): Promise<void>=> {
   try {
+    const { username, password } = req.body;
+
+    // Verificar si el usuario existe
+    const user = await fetchUser(username);
+    if(!user) {
+      res.status(400).json({ error: "Username don't exists" });
+      return;
+    }
+
+    const handleLogin = await comparePassword(password, user.password);
+
+    // Verificar si el login es correcto
+    if (!handleLogin) {
+      res.status(400).json({ error: "Incorrect Password" });
+      return;
+    }
+
+
+    // Llamada al model
     const login = await createLogin();
     res.status(200).json(login);
   }
   catch(err) {
     // *** RECUERDA CAMBIAR LOS ERRORES A ALGO MÁS GENERAL POR CUESTIONES DE SEGURIDAD, ALGO COMO "INTERNAL SERVER ERROR" ***
-    res.status(500).json({ error: `Error en el Login ${err}` });
+    res.status(500).json({ error: `Error en el Login` });
   }
 };
 
@@ -24,8 +43,8 @@ export const postRegister = async(req: Request, res: Response): Promise<void>=> 
     const { username, password } = req.body;
 
     // Verificar si el usuario ya existe
-    const exists = await userExists(username);
-    if(exists) {
+    const user = await userExists(username);
+    if(user) {
       res.status(400).json({ error: "Username already exists" });
       return;
     }

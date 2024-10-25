@@ -9,7 +9,7 @@ import { validateUserInput } from '../middlewares/userValidationMiddleware';
 
 const router = Router();
 
-router.post('/login', postLogin);
+router.post('/login', validateUserInput, postLogin);
 router.post('/register', validateUserInput, postRegister);
 router.post('/logout', postLogout);
 

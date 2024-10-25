@@ -1,15 +1,32 @@
-import pool from '../config/database';
+import { findUserByUsername, userExistsByUsername } from '../models/userModel';
 
-// Verificar si el usuario ya existe
 // Devuelve una promesa de tipo booleana ya que retorna true o false
-export const userExists = async (username: string): Promise<boolean>=> {
-  // Realiza un contador en todas las filas *
-  const [rows] = await pool.query(`
-    SELECT COUNT(*) AS count FROM users WHERE username = ?
-  `, [username]);
-  // La consulta de arriba daría como resultado algo como [{"count": 0}] si no se encuentra coincidencia y [{"count": 1}] si se encuentra coincidencia
-  // Al utilizar el .count significa que de nuestro arreglo rows, que para este caso solo sería una fila, accedemos al punto 0 del arreglo porque solo hay una fila, y con .count accedemos al valor de la consulta realizada arriba
-  const count = (rows as any)[0].count;
+// Verificar si el usuario existe en la base de datos
+export const fetchUser = async (username: string): Promise<any> => {
+  const user = await findUserByUsername(username);
 
-  return count > 0; // Retorna true si es mayor a 0
+  return user;
+};
+
+export const userExists = async (username: string): Promise<Boolean>=> {
+  const exists = await userExistsByUsername(username);
+
+  // Retorna true si el usuario existe, false si no existe
+  return exists;
 }
+
+// // VERIFICAR CONTRASEÑA
+
+// export const fetchPassword = async (username: string): Promise<string | null>=> {
+//   const [rows] = await pool.query(`
+//     SELECT password FROM users WHERE username = ?  
+//   `, [username]);
+
+//   if ((rows as any).length === 0) {
+//     return null;
+//   }
+
+//   const { password } = (rows as any)[0];
+
+//   return password;
+// }
