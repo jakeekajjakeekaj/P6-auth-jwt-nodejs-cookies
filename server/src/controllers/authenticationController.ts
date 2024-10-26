@@ -7,6 +7,7 @@ import {
 } from '../models/authenticationModel';
 import { fetchUser, userExists } from '../services/userValidationService';
 import { passwordHash, comparePassword } from '../services/passwordHashService';
+import { generateToken } from '../services/jsonWebTokenService';
 
 export const postLogin = async(req: Request, res: Response): Promise<void>=> {
   try {
@@ -18,10 +19,10 @@ export const postLogin = async(req: Request, res: Response): Promise<void>=> {
       res.status(400).json({ error: "Username don't exists" });
       return;
     }
-
+    
+    // Verificar si el login es correcto
     const handleLogin = await comparePassword(password, user.password);
 
-    // Verificar si el login es correcto
     if (!handleLogin) {
       res.status(400).json({ error: "Incorrect Password" });
       return;
@@ -30,6 +31,9 @@ export const postLogin = async(req: Request, res: Response): Promise<void>=> {
 
     // Llamada al model
     const login = await createLogin();
+
+    // Generacion del JWT
+    const token = generateToken(user.id, user.username);
     res.status(200).json(login);
   }
   catch(err) {

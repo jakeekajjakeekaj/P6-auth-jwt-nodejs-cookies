@@ -8,5 +8,6 @@ export const config = {
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
   port: process.env.MYSQL_PORT,
-  salt_rounds: process.env.MYSQL_SALT_ROUNDS
+  salt_rounds: process.env.MYSQL_SALT_ROUNDS,
+  jwt_secret: process.env.JWT_SECRET
 }
