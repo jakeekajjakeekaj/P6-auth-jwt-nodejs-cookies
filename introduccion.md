@@ -85,3 +85,9 @@ De esta manera podremos encriptar la contraseña, lo bueno de hacer esto, es que
 Ahora recordemos que estamos usando TS, por lo que también debemos instalar:
 "npm i --save-dev @types/bcrypt"
 La generación de la contraseña hasheada se manejará dentro del service
+
+Ahora vamos a utilizar las cookies, para esto debemos instalar:
+"npm i cookie-parser"
+y
+"npm i --save-dev @types/cookie-parser"
+De esta manera ya podremos comenzar a utilizar las cookies, esto viene bien ya que si lo guardamos en local storage nos pueden hacer un ataque tipo cross site scripting, lo que significaría que otros sitios pueden ejecutar scripts para obtener la información local storage; pero con las cookies esto no es posible ya que tienen una medida extra de seguridadque básicamente solo permite la extracción de información del sitio configurado, al final no es algo infalible, pero es una medida extra de seguridad; otra cosa es el famoso SSL, osea el https para así cifrar la información y evitar al "hombre del medio" osea alguien que intercepte esta información ya que de hacerlo, la recibiría encriptada

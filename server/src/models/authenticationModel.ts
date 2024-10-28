@@ -19,6 +19,6 @@ export const createLogout = async()=> {
   return "Creacion del Logout";
 }
 
-export const fetchProtected = async()=> {
-  return "Obtención de la ruta Protected";
+export const fetchProtected = async(data: any)=> {
+  return "Obtención de la ruta Protected" + data;
 }

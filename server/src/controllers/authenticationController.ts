@@ -8,6 +8,8 @@ import {
 import { fetchUser, userExists } from '../services/userValidationService';
 import { passwordHash, comparePassword } from '../services/passwordHashService';
 import { generateToken } from '../services/jsonWebTokenService';
+import jwt from 'jsonwebtoken'
+import { config } from '../config/config';
 
 export const postLogin = async(req: Request, res: Response): Promise<void>=> {
   try {
@@ -34,6 +36,13 @@ export const postLogin = async(req: Request, res: Response): Promise<void>=> {
 
     // Generacion del JWT
     const token = generateToken(user.id, user.username);
+    // Generación de la cookie
+    res.cookie('access_token', token, {
+      httpOnly: true,  // La cookie solo se puede acceder en el servidor, es decir que con un document.cookie no es posible acceder
+      secure: process.env.NODE_ENV === 'production', // La cookie solo se puede acceder en https
+      sameSite: 'strict',  // La cookie solo se puede acceder en el mismo dominio
+      maxAge: 1000 * 60 * 60  // La cookie tiene un tiempo de validez de 1 hora
+    })
     res.status(200).json(login);
   }
   catch(err) {
@@ -65,7 +74,7 @@ export const postRegister = async(req: Request, res: Response): Promise<void>=> 
   }
 };
 
-export const postLogout = async(req: Request, res: Response)=> {
+export const postLogout = async(req: Request, res: Response): Promise<void>=> {
   try {
     const logout = await createLogout();
     res.status(200).json(logout);
@@ -75,9 +84,18 @@ export const postLogout = async(req: Request, res: Response)=> {
   }
 };
 
-export const getProtected = async(req: Request, res: Response)=> {
+export const getProtected = async(req: Request, res: Response): Promise<void>=> {
   try {
-    const protect = await fetchProtected();
+    const token = req.cookies.access_token;
+    if(!config.jwt_secret) {
+      // res.status(400).json({ error: 'Internal server error' });
+      throw new Error("JWT secret is not defined");
+    }
+    const data = jwt.verify(token, config.jwt_secret)
+    if(!token) {
+      res.status(403).send("Access not authorized");
+    }
+    const protect = await fetchProtected(data);
     res.status(200).json(protect);
   }
   catch (err) {
