@@ -91,3 +91,13 @@ Ahora vamos a utilizar las cookies, para esto debemos instalar:
 y
 "npm i --save-dev @types/cookie-parser"
 De esta manera ya podremos comenzar a utilizar las cookies, esto viene bien ya que si lo guardamos en local storage nos pueden hacer un ataque tipo cross site scripting, lo que significaría que otros sitios pueden ejecutar scripts para obtener la información local storage; pero con las cookies esto no es posible ya que tienen una medida extra de seguridadque básicamente solo permite la extracción de información del sitio configurado, al final no es algo infalible, pero es una medida extra de seguridad; otra cosa es el famoso SSL, osea el https para así cifrar la información y evitar al "hombre del medio" osea alguien que intercepte esta información ya que de hacerlo, la recibiría encriptada
+
+*** RECOMENDACIONES IMPORTANTES ***
+
+Si bien para este proyecto no se están utilizando, es recomendable utilizar un ORM como:
+"TypeORM"
+Esto ayuda muchísimo en muchos aspectos, para empezar ya no tenemos que escribir código SQL, lo que también evita las inyecciones SQL, sino que también podemos crear la DB desde aquí, es decir que ya no tenemos que acceder a la consola para crear la DB junto con sus tablas y relaciones, porque exactamente, incluso los JOIN ya no son necesarios ya que con el ORM también nos facilitan las relaciones que se pueden ver como complejas
+
+Otra cosa que es recomendable de usar para el caso de la validaciones sería:
+"ZOD"
+Y los mejor de todo, es que aparte de ser simple y ahorrarnos todas las validaciones que deberíamos escribir de forma manual, esta misma librería es super recomendable para tanto front como back
